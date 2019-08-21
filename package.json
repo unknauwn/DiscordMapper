@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node aubobot.s"
+    "start": "node aubobot.js"
   },
   "repository": {
     "type": "git",
