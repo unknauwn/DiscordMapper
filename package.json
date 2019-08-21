@@ -1,0 +1,25 @@
+{
+  "name": "DiscordBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unknauwn/AuBOBot-Raids.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unknauwn/AuBOBot-Raids/issues"
+  },
+  "homepage": "https://github.com/unknauwn/AuBOBot-Raids#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "moment": "^2.24.0",
+    "request": "^2.88.0"
+  }
+}
