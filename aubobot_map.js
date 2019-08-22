@@ -69,17 +69,24 @@ bot.on('message', message => {
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
-
     var users_lst = message.channel.guild.members;
+    var rolesName = ["Candidat"];
 
-    users_lst.forEach(function(element) {
-      console.log('name: ' + element.user.username);
-      console.log('user id: ' + element.user.id);
+    let membersWithRole = message.guild.members.filter(member => {
+      return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
+    }).map(member => {
+      return {"discord_name": member.user.username, "discord_user_id": member.user.id};
     })
 
-    // request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
-    //   message.reply(body)
-    // });
+    //console.log(JSON.stringify(membersWithRole));
+    //return;
+    //membersWithRole.forEach(function(element) {
+    //console.log('name: ' + element.discord_name);
+    //console.log('user id: ' + element.discord_user_id);
+    //})
+    request.post({ url: url, form: { clean_map: 'true', player_arr: membersWithRole}, headers: headers }, function (e, r, body) {
+      message.reply(body)
+    });
   }else if (SplittedMsgSent[0] === '!aubemap') {
     message.reply("\n``Lien pour voir la Carte:``\nhttps://guilde-aube.fr/map");
   }
