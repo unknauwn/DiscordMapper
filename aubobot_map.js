@@ -24,7 +24,7 @@ bot.on('message', message => {
   UserName = UserName.split(/\W|_/g)[0];
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **VOTRE CP**\nSupprimer votre Position -> !delmap **VOTRE CP**\nMettre a jour votre Position -> !updatemap **VOTRE CP**\nAfficher la carte -> !aubemap");
+    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **VOTRE CP**\nSupprimer votre Position -> !delmap\nMettre a jour votre Position -> !updatemap **VOTRE CP**\nAfficher la carte -> !aubemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
     var city = message.content.replace('!addmap ','');
     request.post({ url: url, form: { add_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city}, headers: headers }, function (e, r, body) {
