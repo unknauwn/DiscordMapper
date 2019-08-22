@@ -24,7 +24,7 @@ bot.on('message', message => {
   UserName = UserName.split(/\W|_/g)[0];
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **VOTRE CP**;**VOTRE PAYS**\nSupprimer votre Position -> !delmap\nMettre a jour votre Position -> !updatemap **VOTRE CP**\nAfficher la carte -> !aubemap");
+    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **75000**;**France**\nSupprimer votre Position -> !delmap\nMettre a jour votre Position -> !updatemap **75000**;**France**\nAfficher la carte -> !aubemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
     var cmd = message.content.replace('!addmap ','').split(";");
     var city = cmd[0];
