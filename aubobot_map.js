@@ -24,16 +24,22 @@ bot.on('message', message => {
   UserName = UserName.split(/\W|_/g)[0];
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **VOTRE CP**\nSupprimer votre Position -> !delmap\nMettre a jour votre Position -> !updatemap **VOTRE CP**\nAfficher la carte -> !aubemap");
+    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **VOTRE CP**;**VOTRE PAYS**\nSupprimer votre Position -> !delmap\nMettre a jour votre Position -> !updatemap **VOTRE CP**\nAfficher la carte -> !aubemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
-    var city = message.content.replace('!addmap ','');
-    request.post({ url: url, form: { add_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city}, headers: headers }, function (e, r, body) {
+    var cmd = message.content.replace('!addmap ','').split(";");
+    var city = cmd[0];
+    var country = cmd[1];
+    if(!isNaN(city)){
+      message.reply("Le Code Postal entré n'est pas valide.")
+      return;
+    }
+    request.post({ url: url, form: { add_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!delmap') {
     if(!message.member.roles.find(r => r.name === "Candidat") || message.member.roles.find(r => r.name === "Membre") || message.member.roles.find(r => r.name === "Raideur")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
-       return;
+      return;
     }
     request.post({ url: url, form: { del_player_map: 'true', discord_name: UserAccountName}, headers: headers }, function (e, r, body) {
       message.reply(body)
@@ -41,10 +47,16 @@ bot.on('message', message => {
   }else if (SplittedMsgSent[0] === '!updatemap') {
     if(!message.member.roles.find(r => r.name === "Candidat") || message.member.roles.find(r => r.name === "Membre") || message.member.roles.find(r => r.name === "Raideur")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
-       return;
+      return;
     }
-    var city = message.content.replace('!updatemap ','');
-    request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city}, headers: headers }, function (e, r, body) {
+    var cmd = message.content.replace('!updatemap ','').split(";");
+    var city = cmd[0];
+    var country = cmd[1];
+    if(!isNaN(city)){
+      message.reply("Le Code Postal entré n'est pas valide.")
+      return;
+    }
+    request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!aubemap') {
