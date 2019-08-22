@@ -9,7 +9,7 @@ bot.on('ready', function () {
 
 bot.login('NTkxNjMyMTU5OTM3MjY1NzU5.XVuu2Q.dspvBNuF1Ieq_PISEpcuRHf_YE8')
 
-var url = 'https://api-win.guilde-aube.fr/DiscordAPI/api-bot.php';
+var url = 'https://api-win.guilde-aube.fr/Bots/RaidsAPI/api-bot.php';
 var headers = {
   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:24.0) Gecko/20100101 Firefox/24.0',
   'Content-Type' : 'application/x-www-form-urlencoded'
@@ -43,7 +43,7 @@ bot.on('message', message => {
       //message.author.send(body);
     });
   }else if (SplittedMsgSent[0] === '!addevent') {
-    if(!message.member.roles.find(r => r.name === "Admin") || message.member.roles.find(r => r.name === "Test")){
+    if(!message.member.roles.find(r => r.name === "GM") || message.member.roles.find(r => r.name === "Officier")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
        return;
     }
