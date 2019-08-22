@@ -25,9 +25,10 @@ bot.on('message', message => {
   UserName = UserName.split(/\W|_/g)[0];
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **75000**;**France**\nSupprimer votre Position -> !delmap\nMettre a jour votre Position -> !updatemap **75000**;**France**\nAfficher la carte -> !aubemap");
+    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap 75000\nAjouter votre Position dans le monde -> !addmap 75000;France\nMettre a jour votre Position -> !updatemap 75000\nMettre a jour votre Position dans le monde -> !updatemap 75000;France\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quittées la guilde -> !cleanmap");
   }else if (SplittedMsgSent[0] === '!addmap') {
-    if(!message.member.roles.find(r => r.name === "Candidat") || message.member.roles.find(r => r.name === "Membre") || message.member.roles.find(r => r.name === "Raideur")){
+    var rolesName = ["Candidat", "Membre", "Raideur"];
+    if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
@@ -42,7 +43,8 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!delmap') {
-    if(!message.member.roles.find(r => r.name === "Candidat") && !message.member.roles.find(r => r.name === "Membre") && !message.member.roles.find(r => r.name === "Raideur")){
+    var rolesName = ["Candidat", "Membre", "Raideur"];
+    if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
@@ -50,7 +52,8 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!updatemap') {
-    if(!message.member.roles.find(r => r.name === "Candidat") && !message.member.roles.find(r => r.name === "Membre") && !message.member.roles.find(r => r.name === "Raideur")){
+    var rolesName = ["Candidat", "Membre", "Raideur"];
+    if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
@@ -65,18 +68,13 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!cleanmap') {
-    if(!message.member.roles.find(r => r.name === "GM") && !message.member.roles.find(r => r.name === "Candidat")){
+    var rolesName = ["GM"];
+    if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
     var users_lst = message.channel.guild.members;
-    var rolesName = ["Candidat"];
-
-    // let membersWithRole = message.guild.members.filter(member => {
-    //   return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
-    // }).map(member => {
-    //   return {"discord_name": member.user.username, "discord_user_id": member.user.id};
-    // })
+    var rolesName = ["Candidat", "Membre", "Raideur"];
 
     let membersWithRole = message.guild.members.filter(member => {
       return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
@@ -85,12 +83,6 @@ bot.on('message', message => {
       return member.user.id;
     })
 
-    //console.log(JSON.stringify(membersWithRole));
-    //return;
-    //membersWithRole.forEach(function(element) {
-    //console.log('name: ' + element.discord_name);
-    //console.log('user id: ' + element.discord_user_id);
-    //})
     var size = 500;
     var tmp_player_arr = [];
     for (var i=0; i<membersWithRole.length; i+=size) {
