@@ -33,8 +33,8 @@ bot.on('message', message => {
       return;
     }
     var cmd = message.content.replace('!addmap ','').split(";");
-    var city = cmd[0];
-    var country = (cmd[1] == undefined?"France":cmd[1]);
+    var city = cmd[0].trim();
+    var country = (cmd[1] == undefined?"France":cmd[1].trim());
     if(isNaN(city)){
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
@@ -58,8 +58,8 @@ bot.on('message', message => {
       return;
     }
     var cmd = message.content.replace('!updatemap ','').split(";");
-    var city = cmd[0];
-    var country = (cmd[1] == undefined?"France":cmd[1]);
+    var city = cmd[0].trim();
+    var country = (cmd[1] == undefined?"France":cmd[1].trim());
     if(isNaN(city)){
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
