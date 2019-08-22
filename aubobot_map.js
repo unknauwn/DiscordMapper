@@ -26,8 +26,7 @@ bot.on('message', message => {
   if (SplittedMsgSent[0] === '!helpmap') {
     message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap (**VOTREVILLE**)\nSupprimer votre Position -> !delmap (**VOTREVILLE**)\nMettre a jour votre Position -> !updatemap (**VOTREVILLE**)\nAfficher la carte -> !aubemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
-    var cmd = message.content.replace('!addmap ','').match(/\((.*?)\)/g).map(b=>b.replace(/\(|(.*?)\)/g,"$1"))
-    var city = cmd[0];
+    var city = message.content.replace('!addmap ','');
     request.post({ url: url, form: { add_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
@@ -44,8 +43,7 @@ bot.on('message', message => {
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
        return;
     }
-    var cmd = message.content.replace('!updatemap ','').match(/\((.*?)\)/g).map(b=>b.replace(/\(|(.*?)\)/g,"$1"))
-    var city = cmd[0];
+    var city = message.content.replace('!updatemap ','');
     request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
