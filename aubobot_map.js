@@ -17,11 +17,14 @@ var headers = {
 bot.on('message', message => {
   var SplittedMsgSent = message.content.split(" ");
   var UserDiscordID = message.member.user.id;
-  var UserAccountName = (message.member.user.username).toString('base64');
-  var UserName = (message.member.nickname).toString('base64');
+  var UserAccountName = message.member.user.username;
+  var UserName = message.member.nickname;
   var EventID = SplittedMsgSent[1];
   if(UserName == null)
-  UserName = UserAccountName.toString('base64');
+  UserName = UserAccountName;
+
+  Username = UserName.toString('base64');
+  UserAccountName = UserAccountName.toString('base64');
 
   if (SplittedMsgSent[0] === '!helpmap') {
     message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !updatemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quittées la guilde -> !cleanmap");
