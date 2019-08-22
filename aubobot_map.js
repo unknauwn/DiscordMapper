@@ -91,7 +91,7 @@ bot.on('message', message => {
     //console.log('name: ' + element.discord_name);
     //console.log('user id: ' + element.discord_user_id);
     //})
-    var size = 50;
+    var size = 500;
     var tmp_player_arr = [];
     for (var i=0; i<membersWithRole.length; i+=size) {
       tmp_player_arr = [];
