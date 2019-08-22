@@ -42,7 +42,7 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!delmap') {
-    if(!message.member.roles.find(r => r.name === "Candidat") || message.member.roles.find(r => r.name === "Membre") || message.member.roles.find(r => r.name === "Raideur")){
+    if(!message.member.roles.find(r => r.name === "Candidat") || !message.member.roles.find(r => r.name === "Membre") || !message.member.roles.find(r => r.name === "Raideur")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
@@ -50,7 +50,7 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!updatemap') {
-    if(!message.member.roles.find(r => r.name === "Candidat") || message.member.roles.find(r => r.name === "Membre") || message.member.roles.find(r => r.name === "Raideur")){
+    if(!message.member.roles.find(r => r.name === "Candidat") || !message.member.roles.find(r => r.name === "Membre") || !message.member.roles.find(r => r.name === "Raideur")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
@@ -65,10 +65,17 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!cleanmap') {
-    if(!message.member.roles.find(r => r.name === "GM") || message.member.roles.find(r => r.name === "Candidat")){
+    if(!message.member.roles.find(r => r.name === "GM") || !message.member.roles.find(r => r.name === "Candidat")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
+
+    var users_lst = message.channel.guild.members;
+
+    users_lst.forEach(function(element) {
+      console.log('name: ' + element.user.username);
+      console.log('user id: ' + element.user.id);
+    })
 
     // request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
     //   message.reply(body)
