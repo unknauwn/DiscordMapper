@@ -78,7 +78,7 @@ bot.on('message', message => {
       return {"discord_name": member.user.username, "discord_user_id": member.user.id};
     })
 
-    //console.log(JSON.stringify(membersWithRole));
+    console.log(JSON.stringify(membersWithRole));
     //return;
     //membersWithRole.forEach(function(element) {
     //console.log('name: ' + element.discord_name);
