@@ -16,6 +16,7 @@ var headers = {
 
 bot.on('message', message => {
   var SplittedMsgSent = message.content.split(" ");
+  var UserDiscordID = message.member.user.id;
   var UserAccountName = message.member.user.username;
   var UserName = message.member.nickname;
   var EventID = SplittedMsgSent[1];
@@ -37,7 +38,7 @@ bot.on('message', message => {
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
     }
-    request.post({ url: url, form: { add_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
+    request.post({ url: url, form: { add_player_map: 'true', player_id: UserDiscordID, player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!delmap') {
@@ -60,7 +61,7 @@ bot.on('message', message => {
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
     }
-    request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
+    request.post({ url: url, form: { update_player_map: 'true', player_id: UserDiscordID, player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!cleanmap') {
@@ -69,11 +70,6 @@ bot.on('message', message => {
       return;
     }
 
-    for (let [snowflake, guildMember] of mems) {
-      console.log('snowflake: ' + snowflake);
-      console.log('id: ' + guildMember.id);
-      console.log('user id: ' + guildMember.user.id);
-    }
     // request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
     //   message.reply(body)
     // });
