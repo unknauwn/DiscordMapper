@@ -4,19 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node aubobot.js"
+    "start": "node aubobot_map.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/unknauwn/AuBOBot-Raids.git"
+    "url": "git+https://github.com/unknauwn/AuBOBot-Map.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/unknauwn/AuBOBot-Raids/issues"
+    "url": "https://github.com/unknauwn/AuBOBot-Map/issues"
   },
-  "homepage": "https://github.com/unknauwn/AuBOBot-Raids#readme",
+  "homepage": "https://github.com/unknauwn/AuBOBot-Map#readme",
   "dependencies": {
     "discord.js": "^11.5.1",
     "moment": "^2.24.0",

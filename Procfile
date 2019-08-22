@@ -1,1 +1,1 @@
-worker node aubobot.js
+worker node aubobot_map.js
