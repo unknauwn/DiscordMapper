@@ -29,7 +29,7 @@ bot.on('message', message => {
     var cmd = message.content.replace('!addmap ','').split(";");
     var city = cmd[0];
     var country = cmd[1];
-    if(!isNaN(city)){
+    if(isNaN(city)){
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
     }
@@ -52,7 +52,7 @@ bot.on('message', message => {
     var cmd = message.content.replace('!updatemap ','').split(";");
     var city = cmd[0];
     var country = cmd[1];
-    if(!isNaN(city)){
+    if(isNaN(city)){
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
     }
