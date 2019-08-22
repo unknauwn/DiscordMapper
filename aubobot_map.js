@@ -42,7 +42,7 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!delmap') {
-    if(!message.member.roles.find(r => r.name === "Candidat") || !message.member.roles.find(r => r.name === "Membre") || !message.member.roles.find(r => r.name === "Raideur")){
+    if(!message.member.roles.find(r => r.name === "Candidat") && !message.member.roles.find(r => r.name === "Membre") && !message.member.roles.find(r => r.name === "Raideur")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
@@ -50,7 +50,7 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!updatemap') {
-    if(!message.member.roles.find(r => r.name === "Candidat") || !message.member.roles.find(r => r.name === "Membre") || !message.member.roles.find(r => r.name === "Raideur")){
+    if(!message.member.roles.find(r => r.name === "Candidat") && !message.member.roles.find(r => r.name === "Membre") && !message.member.roles.find(r => r.name === "Raideur")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
@@ -65,7 +65,7 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!cleanmap') {
-    if(!message.member.roles.find(r => r.name === "GM") || !message.member.roles.find(r => r.name === "Candidat")){
+    if(!message.member.roles.find(r => r.name === "GM") & !message.member.roles.find(r => r.name === "Candidat")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
