@@ -23,7 +23,7 @@ bot.on('message', message => {
   if(UserName == null)
   UserName = UserAccountName;
 
-  Username = UserName.toString('base64');
+  UserName = UserName.toString('base64');
   UserAccountName = UserAccountName.toString('base64');
 
   if (SplittedMsgSent[0] === '!helpmap') {
