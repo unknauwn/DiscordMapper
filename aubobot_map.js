@@ -65,7 +65,7 @@ bot.on('message', message => {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!cleanmap') {
-    if(!message.member.roles.find(r => r.name === "GM") & !message.member.roles.find(r => r.name === "Candidat")){
+    if(!message.member.roles.find(r => r.name === "GM") && !message.member.roles.find(r => r.name === "Candidat")){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
