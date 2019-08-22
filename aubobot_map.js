@@ -72,10 +72,16 @@ bot.on('message', message => {
     var users_lst = message.channel.guild.members;
     var rolesName = ["Candidat"];
 
+    // let membersWithRole = message.guild.members.filter(member => {
+    //   return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
+    // }).map(member => {
+    //   return {"discord_name": member.user.username, "discord_user_id": member.user.id};
+    // })
+
     let membersWithRole = message.guild.members.filter(member => {
       return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
     }).map(member => {
-      return {"discord_name": member.user.username, "discord_user_id": member.user.id};
+      return member.user.id;
     })
 
     console.log(JSON.stringify(membersWithRole));
