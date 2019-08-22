@@ -81,18 +81,25 @@ bot.on('message', message => {
     let membersWithRole = message.guild.members.filter(member => {
       return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
     }).map(member => {
+      //return {"discord_name": member.user.username, "discord_user_id": member.user.id};
       return member.user.id;
     })
 
-    console.log(JSON.stringify(membersWithRole));
+    //console.log(JSON.stringify(membersWithRole));
     //return;
     //membersWithRole.forEach(function(element) {
     //console.log('name: ' + element.discord_name);
     //console.log('user id: ' + element.discord_user_id);
     //})
-    request.post({ url: url, form: { clean_map: 'true', player_arr: membersWithRole}, headers: headers }, function (e, r, body) {
-      message.reply(body)
-    });
+    var size = 100;
+    var tmp_player_arr = [];
+    for (var i=0; i<membersWithRole.length; i+=size) {
+      tmp_player_arr = [];
+      tmp_player_arr.push(membersWithRole.slice(i,i+size));
+      request.post({ url: url, form: { clean_map: 'true', player_arr: tmp_player_arr}, headers: headers }, function (e, r, body) {
+        message.reply(body)
+      });
+    }
   }else if (SplittedMsgSent[0] === '!aubemap') {
     message.reply("\n``Lien pour voir la Carte:``\nhttps://guilde-aube.fr/map");
   }
