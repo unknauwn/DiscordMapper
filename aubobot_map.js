@@ -17,8 +17,8 @@ var headers = {
 bot.on('message', message => {
   var SplittedMsgSent = message.content.split(" ");
   var UserDiscordID = message.member.user.id;
-  var UserAccountName = message.member.user.username.toString('base64');
-  var UserName = message.member.nickname.toString('base64');
+  var UserAccountName = (message.member.user.username).toString('base64');
+  var UserName = (message.member.nickname).toString('base64');
   var EventID = SplittedMsgSent[1];
   if(UserName == null)
   UserName = UserAccountName.toString('base64');
