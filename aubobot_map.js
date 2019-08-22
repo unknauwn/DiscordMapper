@@ -32,7 +32,7 @@ bot.on('message', message => {
     }
     var cmd = message.content.replace('!addmap ','').split(";");
     var city = cmd[0];
-    var country = cmd[1];
+    var country = (cmd[1] == undefined?"France":cmd[1]);
     if(isNaN(city)){
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
@@ -55,7 +55,7 @@ bot.on('message', message => {
     }
     var cmd = message.content.replace('!updatemap ','').split(";");
     var city = cmd[0];
-    var country = cmd[1];
+    var country = (cmd[1] == undefined?"France":cmd[1]);
     if(isNaN(city)){
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
@@ -63,6 +63,20 @@ bot.on('message', message => {
     request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
+  }else if (SplittedMsgSent[0] === '!cleanmap') {
+    if(!message.member.roles.find(r => r.name === "GM") || message.member.roles.find(r => r.name === "Candidat")){
+      message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      return;
+    }
+
+    for (let [snowflake, guildMember] of mems) {
+      console.log('snowflake: ' + snowflake);
+      console.log('id: ' + guildMember.id);
+      console.log('user id: ' + guildMember.user.id);
+    }
+    // request.post({ url: url, form: { update_player_map: 'true', player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
+    //   message.reply(body)
+    // });
   }else if (SplittedMsgSent[0] === '!aubemap') {
     message.reply("\n``Lien pour voir la Carte:``\nhttps://guilde-aube.fr/map");
   }
