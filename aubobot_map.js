@@ -26,6 +26,10 @@ bot.on('message', message => {
   if (SplittedMsgSent[0] === '!helpmap') {
     message.reply("\n``Commande Bot Map:`` \nAjouter votre Position -> !addmap **75000**;**France**\nSupprimer votre Position -> !delmap\nMettre a jour votre Position -> !updatemap **75000**;**France**\nAfficher la carte -> !aubemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
+    if(!message.member.roles.find(r => r.name === "Candidat") || message.member.roles.find(r => r.name === "Membre") || message.member.roles.find(r => r.name === "Raideur")){
+      message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      return;
+    }
     var cmd = message.content.replace('!addmap ','').split(";");
     var city = cmd[0];
     var country = cmd[1];
