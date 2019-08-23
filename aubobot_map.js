@@ -16,18 +16,8 @@ var headers = {
 
 bot.on('message', message => {
   var SplittedMsgSent = message.content.split(" ");
-  var UserDiscordID = "";//message.member.user.id;
-  var UserAccountName = "";//message.member.user.username;
-  var UserName = "";//message.member.nickname;
-  var EventID = SplittedMsgSent[1];
-  if(UserName == null)
-  UserName = UserAccountName;
-
-  UserName = UserName.toString('base64');
-  UserAccountName = UserAccountName.toString('base64');
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    //message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !changemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
     message.author.send("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !changemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
@@ -42,7 +32,7 @@ bot.on('message', message => {
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
     }
-    request.post({ url: url, form: { add_player_map: 'true', player_id: UserDiscordID, player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
+    request.post({ url: url, form: { add_player_map: 'true', player_id: message.member.user.id, player_name: (message.member.nickname == null?message.member.user.username:message.member.nickname).toString('base64'), discord_name: message.member.user.username).toString('base64'), player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!delmap') {
@@ -51,7 +41,7 @@ bot.on('message', message => {
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
-    request.post({ url: url, form: { del_player_map: 'true', discord_name: UserAccountName}, headers: headers }, function (e, r, body) {
+    request.post({ url: url, form: { del_player_map: 'true', discord_name: message.member.user.username).toString('base64')}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!changemap') {
@@ -67,7 +57,7 @@ bot.on('message', message => {
       message.reply("Le Code Postal entré n'est pas valide.")
       return;
     }
-    request.post({ url: url, form: { update_player_map: 'true', player_id: UserDiscordID, player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
+    request.post({ url: url, form: { update_player_map: 'true', player_id: message.member.user.id, player_name: (message.member.nickname == null?message.member.user.username:message.member.nickname).toString('base64'), discord_name: message.member.user.username).toString('base64'), player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
   }else if (SplittedMsgSent[0] === '!cleanmap') {
