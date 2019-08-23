@@ -17,7 +17,7 @@ var headers = {
 bot.on('message', message => {
   var SplittedMsgSent = message.content.split(" ");
   var EventID = SplittedMsgSent[1];
-  var CMD  = ['!helpmap', "!delmap", "!changemap", "!cleanmap", "!updatemap"];
+  var CMD  = ["!helpmap", "!addmap", "!delmap", "!changemap", "!cleanmap", "!updatemap"];
   if(CMD.indexOf(SplittedMsgSent[0]) !== -1){
     var UserDiscordID = (message.member.user.id).toString('base64');
     var UserAccountName = (message.member.user.username).toString('base64');
