@@ -27,7 +27,7 @@ bot.on('message', message => {
   UserAccountName = UserAccountName.toString('base64');
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !updatemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quittées la guilde -> !cleanmap");
+    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !updatemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
@@ -91,6 +91,30 @@ bot.on('message', message => {
       tmp_player_arr = [];
       tmp_player_arr.push(membersWithRole.slice(i,i+size));
       request.post({ url: url, form: { clean_map: 'true', player_arr: tmp_player_arr}, headers: headers }, function (e, r, body) {
+        message.reply(body)
+      });
+    }
+  }else if (SplittedMsgSent[0] === '!updatemap') {
+    var rolesName = ["GM", "Candidat"];
+    if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
+      message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      return;
+    }
+    var users_lst = message.channel.guild.members;
+    var rolesName = ["Candidat", "Membre", "Raideur"];
+
+    let membersWithRole = message.guild.members.filter(member => {
+      return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
+    }).map(member => {
+      return {"discord_name": member.user.username, "discord_user_id": member.user.id};
+    })
+
+    var size = 500;
+    var tmp_player_arr = [];
+    for (var i=0; i<membersWithRole.length; i+=size) {
+      tmp_player_arr = [];
+      tmp_player_arr.push(membersWithRole.slice(i,i+size));
+      request.post({ url: url, form: { update_map: 'true', player_arr: tmp_player_arr}, headers: headers }, function (e, r, body) {
         message.reply(body)
       });
     }
