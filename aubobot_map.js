@@ -27,7 +27,7 @@ bot.on('message', message => {
   UserAccountName = UserAccountName.toString('base64');
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !updatemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
+    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !changemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
@@ -53,13 +53,13 @@ bot.on('message', message => {
     request.post({ url: url, form: { del_player_map: 'true', discord_name: UserAccountName}, headers: headers }, function (e, r, body) {
       message.reply(body)
     });
-  }else if (SplittedMsgSent[0] === '!updatemap') {
+  }else if (SplittedMsgSent[0] === '!changemap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
     }
-    var cmd = message.content.replace('!updatemap ','').split(";");
+    var cmd = message.content.replace('!changemap ','').split(";");
     var city = cmd[0].trim();
     var country = (cmd[1] == undefined?"France":cmd[1].trim());
     if(isNaN(city)){
