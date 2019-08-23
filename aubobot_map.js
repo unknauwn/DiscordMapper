@@ -106,7 +106,7 @@ bot.on('message', message => {
     let membersWithRole = message.guild.members.filter(member => {
       return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
     }).map(member => {
-      return {"player_name": member.nickname, "discord_name": member.user.username, "discord_user_id": member.user.id};
+      return {"player_name": (member.nickname == ""?member.user.username:member.nickname).toString('base64'), "discord_name": (member.user.username).toString('base64'), "discord_user_id": member.user.id};
     })
 
     var size = 500;
