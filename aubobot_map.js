@@ -27,7 +27,8 @@ bot.on('message', message => {
   UserAccountName = UserAccountName.toString('base64');
 
   if (SplittedMsgSent[0] === '!helpmap') {
-    message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !changemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
+    //message.reply("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !changemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
+    message.author.send("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !changemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
   }else if (SplittedMsgSent[0] === '!addmap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
@@ -81,7 +82,6 @@ bot.on('message', message => {
     let membersWithRole = message.guild.members.filter(member => {
       return member.roles.find(x => rolesName.indexOf(x.name) !== -1);
     }).map(member => {
-      //return {"discord_name": member.user.username, "discord_user_id": member.user.id};
       return member.user.id;
     })
 
@@ -95,7 +95,7 @@ bot.on('message', message => {
       });
     }
   }else if (SplittedMsgSent[0] === '!updatemap') {
-    var rolesName = ["GM", "Candidat"];
+    var rolesName = ["GM"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
       return;
