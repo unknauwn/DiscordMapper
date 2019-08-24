@@ -30,47 +30,56 @@ bot.on('message', message => {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      message.delete(1000);
       return;
     }
     var cmd = message.content.replace('!addmap ','').split(";");
     var city = cmd[0].trim();
     var country = (cmd[1] == undefined?"France":cmd[1].trim());
     if(isNaN(city)){
-      message.reply("Le Code Postal entré n'est pas valide.")
+      message.reply("Le Code Postal entré n'est pas valide.");
+      message.delete(1000);
       return;
     }
     request.post({ url: url, form: { add_player_map: 'true', player_id: UserDiscordID, player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
-      message.reply(body)
+      message.author.send(body);
+      message.delete(1000);
     });
   }else if (SplittedMsgSent[0] === '!delmap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      message.delete(1000);
       return;
     }
     request.post({ url: url, form: { del_player_map: 'true', discord_name: UserAccountName}, headers: headers }, function (e, r, body) {
-      message.reply(body)
+      message.author.send(body);
+      message.delete(1000);
     });
   }else if (SplittedMsgSent[0] === '!changemap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      message.delete(1000);
       return;
     }
     var cmd = message.content.replace('!changemap ','').split(";");
     var city = cmd[0].trim();
     var country = (cmd[1] == undefined?"France":cmd[1].trim());
     if(isNaN(city)){
-      message.reply("Le Code Postal entré n'est pas valide.")
+      message.reply("Le Code Postal entré n'est pas valide.");
+      message.delete(1000);
       return;
     }
     request.post({ url: url, form: { update_player_map: 'true', player_id: UserDiscordID, player_name: UserName, discord_name: UserAccountName, player_city: city, player_country: country}, headers: headers }, function (e, r, body) {
-      message.reply(body)
+      message.author.send(body);
+      message.delete(1000);
     });
   }else if (SplittedMsgSent[0] === '!cleanmap') {
     var rolesName = ["GM"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      message.delete(1000);
       return;
     }
     var users_lst = message.channel.guild.members;
@@ -88,13 +97,15 @@ bot.on('message', message => {
       tmp_player_arr = [];
       tmp_player_arr.push(membersWithRole.slice(i,i+size));
       request.post({ url: url, form: { clean_map: 'true', player_arr: tmp_player_arr}, headers: headers }, function (e, r, body) {
-        message.reply(body)
+        message.reply(body);
+        message.delete(1000);
       });
     }
   }else if (SplittedMsgSent[0] === '!updatemap') {
     var rolesName = ["GM"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
       message.reply("Vous n'avez pas le Grade requis pour faire ca.");
+      message.delete(1000);
       return;
     }
     var users_lst = message.channel.guild.members;
@@ -112,7 +123,8 @@ bot.on('message', message => {
       tmp_player_arr = [];
       tmp_player_arr.push(membersWithRole.slice(i,i+size));
       request.post({ url: url, form: { update_map: 'true', player_arr: tmp_player_arr}, headers: headers }, function (e, r, body) {
-        message.reply(body)
+        message.reply(body);
+        message.delete(1000);
       });
     }
   }else if (SplittedMsgSent[0] === '!aubemap') {
