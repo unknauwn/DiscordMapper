@@ -26,6 +26,7 @@ bot.on('message', message => {
 
   if (SplittedMsgSent[0] === '!helpmap') {
     message.author.send("\n``Commande Bot Map:`` \nAjouter votre Position en France-> !addmap **75000**\nAjouter votre Position dans le monde -> !addmap **75000**;**France**\nMettre a jour votre Position en France -> !changemap **75000**\nMettre a jour votre Position dans le monde -> !updatemap **75000**;**France**\nSupprimer votre Position -> !delmap\nAfficher la carte -> !aubemap\n\nAdmin : Nettoyer la map des personnes ayant quitté la guilde -> !cleanmap\nAdmin : Mettre a jour les Pseudo des joueurs enregistré -> !updatemap");
+    message.delete(1000);
   }else if (SplittedMsgSent[0] === '!addmap') {
     var rolesName = ["Candidat", "Membre", "Raideur"];
     if(!message.member.roles.find(x => rolesName.indexOf(x.name) !== -1)){
