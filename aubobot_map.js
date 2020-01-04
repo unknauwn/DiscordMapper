@@ -129,6 +129,6 @@ bot.on('message', message => {
       });
     }
   }else if (SplittedMsgSent[0] === '!aubemap') {
-    message.reply("\n``Lien pour voir la Carte:``\nhttps://guilde-aube.fr/map");
+    message.reply("\n``Lien pour voir la Carte:``\nhttps://guilde-aube.fr/map\n**!helpmap** pour voir les commandes disponibles");
   }
 })
