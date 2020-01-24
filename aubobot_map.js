@@ -6,7 +6,7 @@ bot.on('ready', function () {
   console.log("Bot Logged In")
 })
 
-bot.login('NjE0MDA3OTk1NTQxNDg3NjE2.XV5Nig.ED9Vbs-NUIyxyWha-cTt-28LgkI')
+bot.login('NjE0MDA3OTk1NTQxNDg3NjE2.Xiq_MQ.67M0luxrEXjJ4THb89iGFMvPJ_4')
 
 var url = 'https://api-win.guilde-aube.fr/Bots/MapAPI/api-bot.php';
 var headers = {
