@@ -1,1 +1,1 @@
-worker node aubobot_map.js
+worker node discordmapper.js
