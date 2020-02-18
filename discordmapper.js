@@ -92,7 +92,7 @@ bot.on('message', message => {
 			.setDescription(":information_source: "+body)
 				.setThumbnail("https://discordmapper.com/assets/img/discordmapper_logo.png")
 				.setTimestamp()
-				.setURL("http://discordmapper.com/map?map="+ServerID)
+				.setURL("http://discordmapper.com/map)
 				.addField('\u200b', ":link: Visit us on [DiscordMapper.com](http://discordmapper.com) | **!maphelp** for commands", true)
 					.setFooter(`@${message.author.tag}.`, message.author.displayAvatarURL);
 				message.reply({embed});
@@ -110,7 +110,7 @@ bot.on('message', message => {
 			.setDescription(":information_source: "+body)
 				.setThumbnail("https://discordmapper.com/assets/img/discordmapper_logo.png")
 				.setTimestamp()
-				.setURL("http://discordmapper.com/map?map="+ServerID)
+				.setURL("http://discordmapper.com)
 				.addField('\u200b', ":link: Visit us on [DiscordMapper.com](http://discordmapper.com) | **!maphelp** for commands", true)
 					.setFooter(`@${message.author.tag}.`, message.author.displayAvatarURL);
 				message.reply({embed});
@@ -136,7 +136,7 @@ bot.on('message', message => {
 			.setDescription(":information_source: "+body)
 				.setThumbnail("https://discordmapper.com/assets/img/discordmapper_logo.png")
 				.setTimestamp()
-				.setURL("http://discordmapper.com/map?map="+ServerID)
+				.setURL("http://discordmapper.com/map)
 				.addField('\u200b', ":link: Visit us on [DiscordMapper.com](http://discordmapper.com) | **!maphelp** for commands", true)
 					.setFooter(`@${message.author.tag}.`, message.author.displayAvatarURL);
 				message.reply({embed});
@@ -152,7 +152,7 @@ bot.on('message', message => {
 			.setDescription(":information_source: "+body)
 				.setThumbnail("https://discordmapper.com/assets/img/discordmapper_logo.png")
 				.setTimestamp()
-				.setURL("http://discordmapper.com/map?map="+ServerID)
+				.setURL("http://discordmapper.com/map)
 				.addField('\u200b', ":link: Visit us on [DiscordMapper.com](http://discordmapper.com) | **!maphelp** for commands", true)
 					.setFooter(`@${message.author.tag}.`, message.author.displayAvatarURL);
 				message.reply({embed});
