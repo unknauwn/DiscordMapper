@@ -56,7 +56,8 @@ bot.on('message', message => {
 		}else if (CommandRequest === '!mapinit') {
 			if (!message.member.hasPermission("ADMINISTRATOR"))
 			return message.reply('You are not the Admin of this Discord Server!')
-			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
+      return;
+			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			request.post({ url: url, form: { make_map: 'true', server_id: ServerID, server_name: message.guild.name, user_data: UserData}, headers: headers }, function (e, r, body) {
 				const embed = new Discord.RichEmbed()
 			.setTitle("Server: "+message.guild.name)
@@ -80,7 +81,7 @@ bot.on('message', message => {
 				message.delete(1000);
 				return;
 			}
-			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
+			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			var LatLng = {lat: splitCoordinates[0], lng: splitCoordinates[1]};
 
 			request.post({ url: url, form: { add_user_map: 'true', user_id: UserDiscordID, user_name: UserName, discord_name: UserAccountName, user_data: UserData, user_server: ServerID, user_location: LatLng}, headers: headers }, function (e, r, body) {
@@ -124,7 +125,7 @@ bot.on('message', message => {
 				message.delete(1000);
 				return;
 			}
-			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
+			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			var LatLng = {lat: splitCoordinates[0], lng: splitCoordinates[1]};
 
 			request.post({ url: url, form: { update_user_map: 'true', user_id: UserDiscordID, user_name: UserName, discord_name: UserAccountName, user_data: UserData, user_server: ServerID, user_location: LatLng}, headers: headers }, function (e, r, body) {
