@@ -189,6 +189,7 @@ bot.on('message', message => {
 				.addField('\u200b', ":link: Visit us on [DiscordMapper.com](http://discordmapper.com) | **!maphelp** for commands", true)
 					.setFooter(`@${message.author.tag}.`, message.author.displayAvatarURL);
 					message.channel.send({embed});
+			                message.delete(1000);
 					// message.reply("\n``Lien pour voir la Carte:``\nhttps://google.com/map\n**!dmaphelp** pour voir les commandes disponibles");
 				}else if (CommandRequest === '!mapclean') {
 					if (!message.member.hasPermission("ADMINISTRATOR"))
