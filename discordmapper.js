@@ -59,8 +59,7 @@ bot.on('message', message => {
 			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			request.post({ url: url, form: { make_map: 'true', server_id: ServerID, server_name: message.guild.name, user_data: UserData}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
-				//message.channel.send({embed});
-				message.author.send({embed});
+				message.channel.send({embed});
 				//message.delete(2000);
 			});
 		}else if (CommandRequest === '!mapadd') {
@@ -106,8 +105,8 @@ bot.on('message', message => {
 			});
 		}else if (CommandRequest === '!mapdelete') {
 			request.post({ url: url, form: { del_user_map: 'true', user_id: UserDiscordID, user_server: ServerID}, headers: headers }, function (e, r, body) {
-				var embedResp = makeEmbed(message, JSON.parse(body));
-				message.reply({embedResp});
+				const embed = makeEmbed(message, JSON.parse(body));
+				message.reply({embed});
 				message.delete(1000);
 			});
 		}else if (CommandRequest === '!mapdistance') {
@@ -121,7 +120,7 @@ bot.on('message', message => {
 			});
 		}else if (CommandRequest === '!map') {
 			request.post({ url: url, form: { get_map: 'true', server_id: ServerID}, headers: headers }, function (e, r, body) {
-				const embed = makeEmbed(message, JSON.parse(body));
+        const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
 				//message.delete(2000);
 			});
