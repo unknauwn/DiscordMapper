@@ -16,10 +16,10 @@ var headers = {
 };
 
 bot.on('message', message => {
-	
+
 	if(message.channel.type === "dm")
 	return;
-	
+
 	var ParsedMsg = message.content.split(" ");
 	var CommandRequest = ParsedMsg[0];
 	var CMD  = ["!map", "!maphelp", "!mapinit", "!mapadd", "!mapupdateimage", "!mapdelete", "!mapupdate", "!mapdistance", "!mapclean", "!maprefresh"];
@@ -29,7 +29,7 @@ bot.on('message', message => {
 		var UserAccountName = (message.member.user.username).toString('base64');
 		var UserName = (message.member.nickname == null?message.member.user.username:message.member.nickname).toString('base64');
 	}
-	
+
 	if (CommandRequest === '!maphelp') {
 		const embed = new Discord.RichEmbed()
 		.setTitle("DiscordMapper Commands List")
@@ -51,7 +51,7 @@ bot.on('message', message => {
 			"**!maprefresh** Refresh all users information like Nickname, Roles etc\n", true)
 			.setFooter(`@${message.author.tag}.`, message.author.displayAvatarURL);
 			message.channel.send({embed});
-			
+
 			message.delete(1000);
 		}else if (CommandRequest === '!mapinit') {
 			if (!message.member.hasPermission("ADMINISTRATOR"))
@@ -59,7 +59,8 @@ bot.on('message', message => {
 			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			request.post({ url: url, form: { make_map: 'true', server_id: ServerID, server_name: message.guild.name, user_data: UserData}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
-				message.channel.send({embed});
+				//message.channel.send({embed});
+				message.author.send({embed});
 				//message.delete(2000);
 			});
 		}else if (CommandRequest === '!mapadd') {
@@ -72,7 +73,7 @@ bot.on('message', message => {
 			}
 			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			var LatLng = {lat: splitCoordinates[0], lng: splitCoordinates[1]};
-			
+
 			request.post({ url: url, form: { add_user_map: 'true', user_id: UserDiscordID, user_name: UserName, discord_name: UserAccountName, user_data: UserData, user_server: ServerID, user_location: LatLng}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
@@ -96,7 +97,7 @@ bot.on('message', message => {
 			}
 			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			var LatLng = {lat: splitCoordinates[0], lng: splitCoordinates[1]};
-			
+
 			request.post({ url: url, form: { update_user_map: 'true', user_id: UserDiscordID, user_name: UserName, discord_name: UserAccountName, user_data: UserData, user_server: ServerID, user_location: LatLng}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
@@ -127,9 +128,9 @@ bot.on('message', message => {
 		}else if (CommandRequest === '!mapclean') {
 			if (!message.member.hasPermission("ADMINISTRATOR"))
 			return message.reply('You are not the Admin of this Discord Server!')
-			
+
 			var Users_lst = message.channel.guild.members.map(member => member.user.id);
-			
+
 			request.post({ url: url, form: { clean_map: 'true', users_lst: Users_lst, user_server: ServerID}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
@@ -138,9 +139,9 @@ bot.on('message', message => {
 		}else if (CommandRequest === '!maprefresh') {
 			if (!message.member.hasPermission("ADMINISTRATOR"))
 			return message.reply('You are not the Admin of this Discord Server!')
-			
+
 			var Users_data = message.guild.members.map(member => ({user_id: member.user.id, user_nickname: member.nickname == null?member.user.username:member.nickname, user_name: member.user.username, user_hashtag: member.user.discriminator, user_roles: member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""}));
-			
+
 			request.post({ url: url, form: { refresh_map: 'true', users_data: Users_data, user_server: ServerID}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
@@ -148,7 +149,7 @@ bot.on('message', message => {
 			});
 		}
 	})
-	
+
 	function makeEmbed(message, response){
 		return new Discord.RichEmbed()
 		.setTitle("Server: "+message.guild.name)
@@ -161,7 +162,7 @@ bot.on('message', message => {
 		.addField('\u200b', ":link: Visit us on [DiscordMapper.com](http://discordmapper.com) | **!maphelp** for commands", true)
 			.setFooter(`@${message.author.tag}.`, message.author.displayAvatarURL);
 		}
-		
+
 		function isValidCoordinates(coordinates){
 			var args = coordinates.split(/;/);
 			var lat = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/;
