@@ -31,7 +31,7 @@ bot.on('message', message => {
 	}
 
 	if (CommandRequest === '!maphelp') {
-		const embed = new Discord.RichEmbed()
+			const embed = new Discord.RichEmbed()
 		.setTitle("DiscordMapper Commands List")
 		.setAuthor("DiscordMapper", "https://discordmapper.com/assets/img/discordmapper_logo.png")
 		.setColor(0x3D85C6)
@@ -39,11 +39,12 @@ bot.on('message', message => {
 			.setThumbnail("https://discordmapper.com/assets/img/discordmapper_logo.png")
 			.setTimestamp()
 			.setURL("http://discordmapper.com")
-			.addField(":unlock: **Commands**", "**!maphelp** This show you all availables commands.\n"+
+			.addField(":unlock: **Commands**", "**!map** Send you the link of your own Map.\n"+
+			"**!maphelp** This show you all availables commands.\n"+
 			"**!mapadd LAT;LNG** Add your position on the map(eg: !mapadd 11.13371337;11.13371337)\n"+
 			"**!mapupdate LAT;LNG** Update your position on the map(eg: !mapadd 11.13371337;11.13371337)\n"+
 			"**!mapupdateimage URL_IMAGE** Update your Image on the map to your Pos\n"+
-			"**!mapdelete** Delete your position on the map"+
+			"**!mapdelete** Delete your position on the map\n"+
 			"**!mapdistance TAG_USER** Return distance between you and the user mentionned\n", true)
 			.addBlankField()
 			.addField(":lock: **Commands Admin**", "**!mapinit** This allow you to create your Server Map.\n"+
