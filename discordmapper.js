@@ -67,9 +67,9 @@ bot.on('message', message => {
 			var cmd = message.content.replace(CommandRequest,'');
 			var splitCoordinates = cmd.split(/;/);
 			if(!isValidCoordinates(cmd)){
-				const embed = makeEmbed(message, JSON.parse(body));
-				message.channel.send({embed});
-				//message.delete(2000);
+				message.reply("Coordinate are wrong, please verify.");
+				message.delete(2000);
+				return;
 			}
 			var UserData = {user_id: message.member.user.id, user_nickname: message.member.nickname == null?message.member.user.username:message.member.nickname, user_name: message.member.user.username, user_hashtag: message.member.user.discriminator, user_roles: message.member.roles ? message.member.roles.map(r => `${r.name}`).join(' | ') : ""};
 			var LatLng = {lat: splitCoordinates[0], lng: splitCoordinates[1]};
@@ -77,7 +77,7 @@ bot.on('message', message => {
 			request.post({ url: url, form: { add_user_map: 'true', user_id: UserDiscordID, user_name: UserName, discord_name: UserAccountName, user_data: UserData, user_server: ServerID, user_location: LatLng}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 			});
 		}else if (CommandRequest === '!mapupdateimage') {
 			var cmd = message.content.replace(CommandRequest,'');
@@ -85,7 +85,7 @@ bot.on('message', message => {
 			request.post({ url: url, form: { update_img: 'true', user_id: UserDiscordID, user_img_url: imgUrl, user_server: ServerID}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 			});
 		}else if (CommandRequest === '!mapupdate') {
 			var cmd = message.content.replace(CommandRequest,'');
@@ -101,7 +101,7 @@ bot.on('message', message => {
 			request.post({ url: url, form: { update_user_map: 'true', user_id: UserDiscordID, user_name: UserName, discord_name: UserAccountName, user_data: UserData, user_server: ServerID, user_location: LatLng}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 				//message.author.send(body);
 			});
 		}else if (CommandRequest === '!mapdelete') {
@@ -117,13 +117,13 @@ bot.on('message', message => {
 			request.post({ url: url, form: { user_distance_map: 'true', users_from_id: userFrom, users_to_id: userTo, user_server: ServerID}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 			});
 		}else if (CommandRequest === '!map') {
 			request.post({ url: url, form: { get_map: 'true', server_id: ServerID}, headers: headers }, function (e, r, body) {
         const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 			});
 		}else if (CommandRequest === '!mapclean') {
 			if (!message.member.hasPermission("ADMINISTRATOR"))
@@ -134,7 +134,7 @@ bot.on('message', message => {
 			request.post({ url: url, form: { clean_map: 'true', users_lst: Users_lst, user_server: ServerID}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 			});
 		}else if (CommandRequest === '!maprefresh') {
 			if (!message.member.hasPermission("ADMINISTRATOR"))
@@ -145,7 +145,7 @@ bot.on('message', message => {
 			request.post({ url: url, form: { refresh_map: 'true', users_data: Users_data, user_server: ServerID}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.channel.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 			});
 		}
 	})
