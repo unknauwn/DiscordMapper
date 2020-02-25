@@ -61,7 +61,7 @@ bot.on('message', message => {
 			request.post({ url: url, form: { make_map: 'true', server_id: ServerID, server_name: message.guild.name, user_data: UserData}, headers: headers }, function (e, r, body) {
 				const embed = makeEmbed(message, JSON.parse(body));
 				message.author.send({embed});
-				//message.delete(2000);
+				message.delete(2000);
 			});
 		}else if (CommandRequest === '!mapadd') {
 			var cmd = message.content.replace(CommandRequest,'');
