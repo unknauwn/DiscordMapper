@@ -39,7 +39,7 @@ bot.on('message', message => {
 			.setThumbnail("https://discordmapper.com/assets/img/discordmapper_logo.png")
 			.setTimestamp()
 			.setURL("http://discordmapper.com")
-			.addField(":unlock: **Commands**", "**!map** Send you the link of your own Map.\n"+
+			.addField(":unlock: **Commands**", "**!map** Display the link of the Map.\n"+
 			"**!maphelp** This show you all availables commands.\n"+
 			"**!mapadd LAT;LNG** Add your position on the map(eg: !mapadd 11.13371337;11.13371337)\n"+
 			"**!mapupdate LAT;LNG** Update your position on the map(eg: !mapadd 11.13371337;11.13371337)\n"+
