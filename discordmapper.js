@@ -7,7 +7,7 @@ bot.on('ready', function () {
 	bot.user.setActivity('<> !maphelp for commands');
 })
 
-bot.login('NjE0MDA3OTk1NTQxNDg3NjE2.XkOtCw.22nF1cclVRHtzJEcR5C9eaQh3yM')
+bot.login(process.env.token)
 
 var url = 'https://api.discordmapper.com/api-bot.php';
 var headers = {
